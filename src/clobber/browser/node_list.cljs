@@ -9,11 +9,11 @@
   ILookup
   (-lookup
     ([nodes k]
-       (aget nodes k))
+     (aget nodes k))
     ([nodes k not-found]
-      (if-let [v (aget nodes k)]
-        v
-        not-found)))
+     (if-let [v (aget nodes k)]
+       v
+       not-found)))
 
   ICounted
   (-count [nodes]

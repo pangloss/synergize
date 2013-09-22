@@ -1,4 +1,4 @@
-(defproject clobber "0.1.0-SNAPSHOT"
+(defproject xnlogic/clobber "0.1.0-SNAPSHOT"
   :clojurescript? true
   :description "Clobber Javascript objects with lots of useful stuff"
   :url "https://github.com/pangloss/clobber"
