@@ -17,3 +17,6 @@
 (defn obj-only [o method]
   (when-not (identical? (type o) js/Object)
     (throw (js/TypeError. (str (obj-name (type o)) " does not implement '" (name method) "'")))))
+
+(defn ->array [obj]
+  (.call js/Array.prototype.slice obj))
