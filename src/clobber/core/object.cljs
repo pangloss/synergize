@@ -18,14 +18,6 @@
     (obj-only o :empty)
     (js-obj))
 
-  ICollection
-  (-conj [parent [k v]]
-    (obj-only parent :conj)
-    (let [o (js-obj)]
-      (assoc! o k v)
-      (gobject/extend o parent)
-      o))
-
   ICounted
   (-count [o]
     (obj-only o :count)
@@ -35,13 +27,6 @@
   (-assoc [o k v]
     (obj-only o :assoc)
     (conj o [k v]))
-
-  IMap
-  (-dissoc [parent k]
-    (obj-only parent :dissoc)
-    (let [o (js-obj)]
-      (gobject/extend o parent)
-      (dissoc! o k)))
 
   ITransientCollection
   (-conj! [o [k v]]
