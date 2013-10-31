@@ -1,5 +1,6 @@
 (ns clobber.browser
-  (:require clobber.browser.node-list))
+  (:require clobber.browser.node-list
+            clobber.browser.named-node-map))
 
 ; Enable print / println / pr / prn in the browser.
 (set! *print-fn* #(js/console.log %))
