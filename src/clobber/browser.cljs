@@ -15,5 +15,5 @@
 
 (defn clobber []
   (enable-print)
-  (clobber.browser.node-list/clobber))
-  (clobber.browser.named-node-map/clobber)
+  (clobber.browser.node-list/clobber)
+  (clobber.browser.named-node-map/clobber))

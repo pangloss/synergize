@@ -6,7 +6,7 @@
    map for lookup and like an array of attributes for seq. The combination is
   odd... but that's how NamedNodeMap rolls, and I've found this to work very well.."
   []
-  (when js/window.NamedNodeMap
+  (when js/NamedNodeMap
     (extend-type js/NamedNodeMap
       cljs.core/ISeqable
       (-seq [nodes]
