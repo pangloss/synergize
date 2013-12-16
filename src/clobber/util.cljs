@@ -11,9 +11,6 @@
     n
     "Object"))
 
-(defn object? [o]
-  (identical? (type o) js/Object))
-
 ;; Everything in JS inherits from js/Object. If we applied some of these
 ;; methods to random JS classes, we would get very odd results. For
 ;; instance, (count (js/Date.)) is 4
