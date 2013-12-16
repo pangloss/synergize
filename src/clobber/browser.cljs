@@ -1,5 +1,7 @@
 (ns clobber.browser
   (:require clobber.browser.node-list
+            clobber.browser.style-sheet-list
+            clobber.browser.css-rule-list
             clobber.browser.named-node-map))
 
 (defn pr* [& args]
@@ -16,4 +18,6 @@
 (defn clobber []
   (enable-print)
   (clobber.browser.node-list/clobber)
+  (clobber.browser.style-sheet-list/clobber)
+  (clobber.browser.css-rule-list/clobber)
   (clobber.browser.named-node-map/clobber))

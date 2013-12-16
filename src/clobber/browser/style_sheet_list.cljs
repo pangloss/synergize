@@ -1,4 +1,4 @@
-(ns clobber.browser.node-list
+(ns clobber.browser.style-sheet-list
   (:require [clobber.util :refer [->array]]))
 
 (defn clobber
@@ -6,7 +6,7 @@
    by making lists of nodes returned by DOM query methods act like regular
    sequences."
   []
-  (extend-type js/NodeList
+  (extend-type js/StyleSheetList
     cljs.core/ISeqable
     (-seq [nodes]
       (seq (->array nodes)))
