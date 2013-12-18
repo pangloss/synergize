@@ -22,6 +22,12 @@
            (.-value attr)
            not-found)))
 
+      ITransientMap
+      (-dissoc! [nodes k]
+        (when (.getNamedItem nodes (name k))
+          (.removeNamedItem nodes (name k)))
+        nodes)
+
       ICounted
       (-count [nodes]
         (.-length nodes)))))

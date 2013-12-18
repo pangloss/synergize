@@ -2,6 +2,7 @@
   (:require clobber.browser.node-list
             clobber.browser.style-sheet-list
             clobber.browser.css-rule-list
+            clobber.browser.css-style-declaration
             clobber.browser.named-node-map))
 
 (defn pr* [& args]
@@ -20,4 +21,5 @@
   (clobber.browser.node-list/clobber)
   (clobber.browser.style-sheet-list/clobber)
   (clobber.browser.css-rule-list/clobber)
+  (clobber.browser.css-style-declaration/clobber)
   (clobber.browser.named-node-map/clobber))
