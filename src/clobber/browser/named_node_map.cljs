@@ -6,7 +6,9 @@
    map for lookup and like an array of attributes for seq. The combination is
   odd... but that's how NamedNodeMap rolls, and I've found this to work very well.."
   []
-  (when js/NamedNodeMap
+  (when-let [nnm (aget js/window "MozNamedAttrMap")]
+    (aset js/window "NamedNodeMap" nnm))
+  (when (aget js/window "NamedNodeMap")
     (extend-type js/NamedNodeMap
       cljs.core/ISeqable
       (-seq [nodes]
