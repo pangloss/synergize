@@ -1,10 +1,4 @@
-(ns clobber.browser
-  (:require clobber.browser.node-list
-            clobber.browser.html-collection
-            clobber.browser.style-sheet-list
-            clobber.browser.css-rule-list
-            clobber.browser.css-style-declaration
-            clobber.browser.named-node-map))
+(ns clobber.browser)
 
 (defn pr* [& args]
   (let [c js/console]
@@ -17,11 +11,3 @@
   (set! pr pr*)
   (set! prn pr*))
 
-(defn clobber []
-  (enable-print)
-  (clobber.browser.node-list/clobber)
-  (clobber.browser.html-collection/clobber)
-  (clobber.browser.style-sheet-list/clobber)
-  (clobber.browser.css-rule-list/clobber)
-  (clobber.browser.css-style-declaration/clobber)
-  (clobber.browser.named-node-map/clobber))

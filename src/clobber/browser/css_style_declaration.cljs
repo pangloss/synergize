@@ -1,11 +1,11 @@
 (ns clobber.browser.css-style-declaration
   (:require [clobber.util :refer [->array]]))
 
-(defn clobber
+(defn css-style-declaration
   "Enable use of get, assoc! and dissoc! with the object
    returned by .-style or .getComputedStyle"
-  []
-  (extend-type js/CSSStyleDeclaration
+  [obj]
+  (specify! obj
     ILookup
     (-lookup
       ([csd k]

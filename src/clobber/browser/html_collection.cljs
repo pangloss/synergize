@@ -1,12 +1,11 @@
 (ns clobber.browser.html-collection
   (:require [clobber.util :refer [->array]]))
 
-(defn clobber
+(defn dom-collection
   "These extensions make it much easier to work with the DOM from ClojureScript
-   by making lists of nodes returned by DOM query methods act like regular
-   sequences."
-  []
-  (extend-type js/HTMLCollection
+   by making this list of nodes act like a regular sequence."
+  [obj]
+  (specify! obj
     cljs.core/ISeqable
     (-seq [nodes]
       (seq (->array nodes)))

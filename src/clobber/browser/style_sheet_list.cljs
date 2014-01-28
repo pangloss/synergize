@@ -1,12 +1,12 @@
 (ns clobber.browser.style-sheet-list
   (:require [clobber.util :refer [->array]]))
 
-(defn clobber
+(defn style-sheet-list
   "These extensions make it much easier to work with the DOM from ClojureScript
    by making lists of nodes returned by DOM query methods act like regular
    sequences."
-  []
-  (extend-type js/StyleSheetList
+  [obj]
+  (specify! obj
     cljs.core/ISeqable
     (-seq [nodes]
       (seq (->array nodes)))

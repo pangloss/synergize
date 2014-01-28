@@ -1,10 +1,10 @@
 (ns clobber.core.array
   (:require [clobber.util :refer [strkey]]))
 
-(defn clobber
+(defn extend-array
   "Extend javascript arrays with transient associative methods."
-  []
-  (extend-type array
+  [obj]
+  (specify! obj
     IEmptyableCollection
     (-empty [a]
       (array))

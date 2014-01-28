@@ -2,13 +2,13 @@
   (:require [clobber.util :refer [strkey obj-only]]
             [goog.object :as gobject]))
 
-(defn clobber
+(defn extended-object
   "Enable several collection protocols on regular javascript objects.
 
    Attempts to do this safely, but because everything in javascript is an object,
    this should probably only be done in small projects and never in libraries."
-  []
-  (extend-type object
+  [obj]
+  (specify! obj
     ILookup
     (-lookup
       ([o k]
@@ -57,11 +57,10 @@
       (map (fn [k] [k (get o k)]) (js-keys o)))))
 
 (defn clobber-as-map
-  "This ns is not included by default because
-   it will cause map? to return true for any
-   object."
-  []
-  (extend-type object
+  "This protocol is not included by default because
+   it will cause map? to return true for this object."
+  [obj]
+  (specfy! obj
     IMap
     (-dissoc [parent k]
       (obj-only parent :dissoc)
@@ -70,11 +69,10 @@
         (dissoc! o k)))))
 
 (defn clobber-as-coll
-  "This ns is not included by default because
-   it will cause coll? to return true for any
-   object."
-  []
-  (extend-type object
+  "This protocol is not included by default because
+   it will cause coll? to return true for this object."
+  [obj]
+  (specify! obj
     ICollection
     (-conj [parent [k v]]
       (obj-only parent :conj)
