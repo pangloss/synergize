@@ -60,7 +60,7 @@
   "This protocol is not included by default because
    it will cause map? to return true for this object."
   [obj]
-  (specfy! obj
+  (specify! obj
     IMap
     (-dissoc [parent k]
       (obj-only parent :dissoc)
