@@ -3,6 +3,8 @@
 
 (defmulti synergize! type)
 
+(defmethod synergize! nil [n] n)
+
 
 (defn pr* [& args]
   (let [c js/console]
