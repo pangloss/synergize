@@ -1,7 +1,7 @@
 (ns synergize.browser
   (:require [synergize.util :refer [->array]]))
 
-(defmulti synergize! class)
+(defmulti synergize! type)
 
 
 (defn pr* [& args]
