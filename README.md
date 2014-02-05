@@ -1,36 +1,38 @@
-# clobber
+# Synergize
 
-A ClojureScript library that extends JavaScript objects with
-ClojureScript core protocols.
+A ClojureScript library that uses specify extends JavaScript object
+instances with ClojureScript core protocols.
+
+The current implementation is focussed primarily on DOM collection
+objects.
+
+Currently supported collection types:
+
+* `NodeList` is returned by most DOM methods that produce
+a collection of objects.
+* `DOMCollection` is returned by other DOM methods for a collection of
+  objects
+* `NamedNodeMap` is the structure of DOM node `(.-attributes)` property.
+* `StyleSheetList`
+* `CSSRuleList`
+* `CSSStyleDeclaration`
 
 ## Usage
 
-Only require the namespaces corresponding to the objects you wish to
-extend.  If you wish to extend all objects, require the top-level
-namespaces `clobber.core` and `clobber.browser`.  Alternatively, you can
-extend only specific objects: just require their corresponding
-namespaces (ie. `clobber.browser.node-list`).
-
-No new protocols are defined in this library. Only simple methods that
-minimally implement the necessary protocols are present.  Because this
-only extends core protocols, there are no methods to refer to from
-this library.
-
-Because of the way ClojureScript works, if you require these namespaces
-anywhere in your project, the effected objects will be extended throughout
-your project.
+The `synergize!` multimethod will apply the correct protocol
+specifications to any supported type.
 
 ```clojure
 (ns your.project
-  (:require clobber.core clobber.browser))
+  (:require [synergize.browser :refer [synergize!]]))
 
 ; Now you can natively work with 
-(doseq [element js/document.body.childNodes]
+(doseq [element (synergize! js/document.body.childNodes)]
   (.log js/console "Do something with" element))
 ```
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Darrick Wiebe
 
 Distributed under the Eclipse Public License, the same as Clojure.

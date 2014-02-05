@@ -1,10 +1,11 @@
-(ns clobber.core.array
-  (:require [clobber.util :refer [strkey]]))
+(ns synergize.core.array
+  (:require [synergize.util :refer [strkey]]))
 
-(defn clobber
+; Intentionally not tied into the synergize! multimethod
+(defn synergize-array!
   "Extend javascript arrays with transient associative methods."
-  []
-  (extend-type array
+  [obj]
+  (specify! obj
     IEmptyableCollection
     (-empty [a]
       (array))
