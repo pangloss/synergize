@@ -1,10 +1,6 @@
 (ns synergize.browser
   (:require [synergize.util :refer [->array]]))
 
-(defmulti synergize! type)
-
-(defmethod synergize! nil [n] n)
-
 
 (defn pr* [& args]
   (let [c js/console]
@@ -41,7 +37,6 @@
     (-count [nodes]
       (.-length nodes))))
 
-(defmethod synergize! js/CSSRuleList [obj] (css-rule-list obj))
 
 
 (defn css-style-declaration
@@ -69,9 +64,6 @@
       csd)))
 
 
-(defmethod synergize! js/CSSStyleDeclaration [obj] (css-style-declaration obj))
-
-
 (defn node-list
   "These extensions make it much easier to work with the DOM from ClojureScript
    by making this list of nodes act like a regular sequence."
@@ -94,11 +86,7 @@
     (-count [nodes]
       (.-length nodes))))
 
-(def dom-collection node-list)
-
-(defmethod synergize! js/NodeList [obj] (node-list obj))
-(defmethod synergize! js/DOMCollection [obj] (node-list obj))
-
+(def html-collection node-list)
 
 (defn named-node-map
   "These extensions make the result of calling .attributes act like a read-only
@@ -130,9 +118,6 @@
     (-count [nodes]
       (.-length nodes))))
 
-(defmethod synergize! js/NamedNodeMap [obj] (named-node-map obj))
-
-
 (defn style-sheet-list
   "These extensions make it much easier to work with the DOM from ClojureScript
    by making lists of nodes returned by DOM query methods act like regular
@@ -156,4 +141,18 @@
     (-count [nodes]
       (.-length nodes))))
 
-(defmethod synergize! js/StyleSheetList [obj] (style-sheet-list obj))
+
+(defmulti synergize! type)
+(defmethod synergize! nil [n] n)
+(when (exists? CSSRuleList)
+  (defmethod synergize! js/CSSRuleList [obj] (css-rule-list obj)))
+(when (exists? js/CSSStyleDeclaration)
+  (defmethod synergize! js/CSSStyleDeclaration [obj] (css-style-declaration obj)))
+(when (exists? js/NodeList)
+  (defmethod synergize! js/NodeList [obj] (node-list obj)))
+(when (exists? js/HTMLCollection)
+  (defmethod synergize! js/HTMLCollection [obj] (node-list obj)))
+(when (exists? js/NamedNodeMap)
+  (defmethod synergize! js/NamedNodeMap [obj] (named-node-map obj)))
+(when (exists? js/StyleSheetList)
+  (defmethod synergize! js/StyleSheetList [obj] (style-sheet-list obj)))
