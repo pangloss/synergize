@@ -1,12 +1,10 @@
-(ns clobber.core.object
-  (:require [clobber.util :refer [strkey obj-only]]
+(ns synergize.core.object
+  (:require [synergize.util :refer [strkey]]
             [goog.object :as gobject]))
 
-(defn extended-object
-  "Enable several collection protocols on regular javascript objects.
-
-   Attempts to do this safely, but because everything in javascript is an object,
-   this should probably only be done in small projects and never in libraries."
+; Intentionally not tied into the synergize! multimethod
+(defn synergize-object!
+  "Enable collection protocols on a regular javascript object."
   [obj]
   (specify! obj
     ILookup
@@ -21,24 +19,20 @@
 
     IEmptyableCollection
     (-empty [o]
-      (obj-only o :empty)
       (js-obj))
 
     ICounted
     (-count [o]
-      (obj-only o :count)
       (.-length (js-keys o)))
 
     IAssociative
     (-assoc [o k v]
-      (obj-only o :assoc)
       (conj o [k v]))
 
     ITransientCollection
     (-conj! [o [k v]]
       (assoc! o k v))
     (-persistent! [o]
-      (obj-only o :persistent!)
       (into {} (map (fn [[k v]] [(keyword k) v]) o)))
 
     ITransientAssociative
@@ -53,31 +47,17 @@
 
     ISeqable
     (-seq [o]
-      (obj-only o :seq)
-      (map (fn [k] [k (get o k)]) (js-keys o)))))
+      (map (fn [k] [k (get o k)]) (js-keys o)))
 
-(defn clobber-as-map
-  "This protocol is not included by default because
-   it will cause map? to return true for this object."
-  [obj]
-  (specify! obj
     IMap
     (-dissoc [parent k]
-      (obj-only parent :dissoc)
       (let [o (js-obj)]
         (gobject/extend o parent)
-        (dissoc! o k)))))
+        (dissoc! o k)))
 
-(defn clobber-as-coll
-  "This protocol is not included by default because
-   it will cause coll? to return true for this object."
-  [obj]
-  (specify! obj
     ICollection
     (-conj [parent [k v]]
-      (obj-only parent :conj)
       (let [o (js-obj)]
         (assoc! o k v)
         (gobject/extend o parent)
         o))))
-
