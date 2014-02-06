@@ -12,7 +12,7 @@ Currently supported collection types:
 a collection of objects.
 * `DOMCollection` is returned by other DOM methods for a collection of
   objects
-* `NamedNodeMap` is the structure of DOM node `(.-attributes)` property.
+* `NamedNodeMap` is returned by any node's `attributes` property
 * `StyleSheetList`
 * `CSSRuleList`
 * `CSSStyleDeclaration`
