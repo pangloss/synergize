@@ -149,10 +149,12 @@
 
 (defmulti synergize! type)
 (defmethod synergize! nil [n] n)
-(when (exists? CSSRuleList)
+(when (exists? js/CSSRuleList)
   (defmethod synergize! js/CSSRuleList [obj] (css-rule-list obj)))
 (when (exists? js/CSSStyleDeclaration)
   (defmethod synergize! js/CSSStyleDeclaration [obj] (css-style-declaration obj)))
+(when (exists? js/CSSPageRule)
+  (defmethod synergize! js/CSSPageRule [obj] (css-style-declaration obj)))
 (when (exists? js/NodeList)
   (defmethod synergize! js/NodeList [obj] (node-list obj)))
 (when (exists? js/HTMLCollection)
